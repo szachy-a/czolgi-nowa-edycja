@@ -15,3 +15,4 @@ while running:
         screen.fill((255, 255, 255))
         pygame.transform.scale(screen, realScreen.get_size(), realScreen)
         pygame.display.flip()
+pygame.quit()
