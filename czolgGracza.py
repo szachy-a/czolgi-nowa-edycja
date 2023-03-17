@@ -32,3 +32,4 @@ class CzolgGracza(czolg.Czolg):
             return czolg.LUFA_W_LEWO
         if pos[0] > 100:
             return czolg.LUFA_W_PRAWO
+        return czolg.BRAK_AKCJI
