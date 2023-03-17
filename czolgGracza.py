@@ -12,7 +12,8 @@ import czolg
 class CzolgGracza(czolg.Czolg):
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.surf = pygame.image.load('czolgGracza.jpg').convert()
+        self.orgSurf = pygame.image.load('czolgGracza.jpg').convert()
+        self.surf = self.orgsurf
         self.rect = self.surf.get_rect(topleft=(x, y))
     def podejmijDecyzje(self):
         klawisze = pygame.key.get_pressed()
