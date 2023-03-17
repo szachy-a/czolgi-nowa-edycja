@@ -4,6 +4,8 @@ from pygame.locals import (
 )
 pygame.init()
 
+import czolg
+
 realScreen = pygame.display.set_mode((1366, 768))
 screen = pygame.Surface((1920, 1080))
 
