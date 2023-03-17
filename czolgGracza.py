@@ -28,7 +28,6 @@ class CzolgGracza(czolg.Czolg):
         if klawisze[K_SPACE]:
             return czolg.STRZAL
         pos = pygame.mouse.get_pos()
-        pygame.mouse.set_pos((300, pos[1]))
         if pos[0] < 300:
             return czolg.LUFA_W_LEWO
         if pos[0] > 300:
