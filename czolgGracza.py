@@ -3,7 +3,8 @@ from pygame.locals import (
     K_a,
     K_d,
     K_w,
-    K_s
+    K_s,
+    K_SPACE
 )
 
 import czolg
@@ -23,4 +24,11 @@ class CzolgGracza(czolg.Czolg):
             return czolg.CZOLG_W_PRZOD
         if klawisze[K_s]:
             return czolg.CZOLG_W_TYL
-        
+        if klawisze[K_SPACE]:
+            return czolg.STRZAL
+        pos = pygame.mouse.get_pos()
+        pygame.mouse.set_pos((100, pos[1]))
+        if pos[0] < 100:
+            return czolg.LUFA_W_LEWO
+        if pos[0] > 100:
+            return czolg.LUFA_W_PRAWO
