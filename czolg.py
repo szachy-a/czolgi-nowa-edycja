@@ -13,11 +13,11 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
     def ruch(self):
         match self.podejmijDecyzje():
             case czolg.LUFA_W_LEWO:
-                self.kat += 1
+                self.kat += 3
                 self.surf = pygame.transform.rotate(self.orgSurf, self.kat)
                 self.rect = self.surf.get_rect(center=self.rect.center)
             case czolg.LUFA_W_PRAWO:
-                self.kat -= 1
+                self.kat -= 3
                 self.surf = pygame.transform.rotate(self.orgSurf, self.kat)
                 self.rect = self.surf.get_rect(center=self.rect.center)
     @abc.abstractmethod
