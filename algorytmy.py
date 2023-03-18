@@ -5,14 +5,14 @@ def obliczDystans(x1, y1, x2, y2):
     return math.sqrt((x1-x2)**2 + (y1-y2)**2)
 
 
-def utworzGraf(maskaPoziomu: pygame.mask.Mask):
-    wid, hei = maskaPoziomu.get_size()
-    cellMatrix = [[0 for x in range(30)] for y in range(30)]
-    cellWid = wid // 30
-    cellHei = hei // 30
+def utworzGraf(maska: pygame.mask.Mask):
+    wid, hei = maska.get_size()
+    cellMatrix = [[0 for x in range(40)] for y in range(40)]
+    cellWid = wid // 40
+    cellHei = hei // 40
     for i in range(hei):
         for j in range(wid):
-            bit = maskaPoziomu.get_at((j,i))
+            bit = maska.get_at((j,i))
             if bit == 1:
                 cellMatrix[i//cellHei][j//cellWid] = 1
     graph = {}
@@ -31,27 +31,28 @@ def utworzGraf(maskaPoziomu: pygame.mask.Mask):
                     graph[(x,y)]["connections"].append((x, y + 1))
     return graph
 
-def znajdzSciezke(x1, y1, x2, y2, poziom):
+def znajdzSciezke(x1, y1, x2, y2, graf, szerokoscEkranu, wysokoscEkranu):
+    x1 = x1//(szerokoscEkranu//30)
     inf = float("inf")
-    for x in poziom.keys():
-        poziom[x]["g"] = inf
-        poziom[x]["f"] = inf
-    poziom[(x1,y1)]["g"] = 0
-    poziom[(x1,y1)]["f"] = math.sqrt(((x1-x2)**2 + (y1-y2)**2) * 2)
+    for x in graf.keys():
+        graf[x]["g"] = inf
+        graf[x]["f"] = inf
+    graf[(x1,y1)]["g"] = 0
+    graf[(x1,y1)]["f"] = math.sqrt(((x1-x2)**2 + (y1-y2)**2) * 2)
     current = None
     prq = {(x1,y1)}
     pnd = {}
     while prq != {}:
-        current = min(prq, key=lambda x:poziom[x]["f"])
+        current = min(prq, key=lambda x:graf[x]["f"])
         if current == (x2,y2):
             return pnd, current
         prq.remove(current)
-        for x in poziom[current]["connections"]:
-            tempG = poziom[current]["g"] + 1
-            if tempG < poziom[x]["g"]:
+        for x in graf[current]["connections"]:
+            tempG = graf[current]["g"] + 1
+            if tempG < graf[x]["g"]:
                 pnd[x] = current
-                poziom[x]["g"] = tempG
-                poziom[x]["f"] = poziom[x]["g"] + math.sqrt(((x[0]-(x2,y2)[0])**2 + (x[1]-(x2,y2)[1])**2) * 2)
+                graf[x]["g"] = tempG
+                graf[x]["f"] = graf[x]["g"] + math.sqrt(((x[0]-(x2,y2)[0])**2 + (x[1]-(x2,y2)[1])**2) * 2)
                 if x not in prq:
                     prq.add(x)
     #raise RuntimeError("A* algorithm failed")

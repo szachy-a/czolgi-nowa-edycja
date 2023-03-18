@@ -7,7 +7,7 @@ pygame.init()
 import czolgGracza
 import solider
 
-screen = pygame.display.set_mode((1366, 768))
+screen = pygame.display.set_mode((1280, 720))
 czas = pygame.time.Clock()
 pygame.key.set_repeat(1)
 
