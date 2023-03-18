@@ -13,3 +13,5 @@ class Pocisk(pygame.sprite.Sprite):
         if self.odlegloscStrzalu:
             self.rect.move_ip(*self.wektor * 10)
             self.odlegloscStrzalu -= 1
+        else:
+            self.kill()
