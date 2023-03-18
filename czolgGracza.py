@@ -14,7 +14,7 @@ import czolg
 class CzolgGracza(czolg.Czolg):
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.orgSurf = pygame.image.load('gracz autorstwa Julka.png').convert()
+        self.orgSurf = pygame.image.load('czolgGracza.png').convert()
         self.orgSurf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         self.surf = self.orgSurf.copy()
         self.rect = self.surf.get_rect(topleft=(x, y))
