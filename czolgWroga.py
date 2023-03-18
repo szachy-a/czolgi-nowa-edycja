@@ -1,4 +1,5 @@
 import czolg
 
 class CzolgWroga(czolg.Czolg):
-    pass
+    def podejmijDecyzje(self):
+        return czolg.BRAK_AKCJI
