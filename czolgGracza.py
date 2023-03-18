@@ -29,8 +29,4 @@ class CzolgGracza(czolg.Czolg):
             return czolg.CZOLG_W_TYL
         if klawisze[K_SPACE]:
             return czolg.STRZAL
-        if klawisze[K_LEFT]:
-            return czolg.LUFA_W_LEWO
-        if klawisze[K_RIGHT]:
-            return czolg.LUFA_W_PRAWO
         return czolg.BRAK_AKCJI
