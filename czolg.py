@@ -31,11 +31,13 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
                 self.surf = pygame.transform.rotate(self.orgSurf, self.kat)
                 self.rect = self.surf.get_rect(center=self.rect.center)
                 self.wektor = WEKTORY[self.kat]
+                self.mask = pygame.mask.from_surface(self.surf)
             case czolg.CZOLG_W_PRAWO:
                 self.kat -= 3
                 self.surf = pygame.transform.rotate(self.orgSurf, self.kat)
                 self.rect = self.surf.get_rect(center=self.rect.center)
                 self.wektor = WEKTORY[self.kat]
+                self.mask = pygame.mask.from_surface(self.surf)
             case czolg.CZOLG_W_PRZOD:
                 self.rect.x += self.wektor.x * 3
                 self.rect.y += self.wektor.y * 3
@@ -43,7 +45,7 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
                 self.rect.x -= self.wektor.x * 3
                 self.rect.y -= self.wektor.y * 3
             case czolg.STRZAL:
-                wszystko.add(pocisk.Pocisk(*self.rect.center, None))
+                wszystko.add(pocisk.Pocisk(*self.rect.center, self.wektor))
     @abc.abstractmethod
     def podejmijDecyzje(self):
         pass
