@@ -7,7 +7,7 @@ class Pocisk(pygame.sprite.Sprite):
         self.surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         self.rect = self.surf.get_rect(center=(x, y))
         self.wektor = wektor
-        self.odlegloscStrzalu = odlegloscStrzalu * 10
+        self.odlegloscStrzalu = odlegloscStrzalu * 30
         self.zadajeObrazen = zadajeObrazen
     def update(self, wszystko):
         if self.odlegloscStrzalu:

@@ -28,12 +28,16 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
         match self.podejmijDecyzje():
             case czolg.CZOLG_W_LEWO:
                 self.kat += 3
+                if self.kat >= 360:
+                    self.kat -= 360
                 self.surf = pygame.transform.rotate(self.orgSurf, self.kat)
                 self.rect = self.surf.get_rect(center=self.rect.center)
                 self.wektor = WEKTORY[self.kat]
                 self.mask = pygame.mask.from_surface(self.surf)
             case czolg.CZOLG_W_PRAWO:
                 self.kat -= 3
+                if self.kat <= -360:
+                    self.kat += 360
                 self.surf = pygame.transform.rotate(self.orgSurf, self.kat)
                 self.rect = self.surf.get_rect(center=self.rect.center)
                 self.wektor = WEKTORY[self.kat]
