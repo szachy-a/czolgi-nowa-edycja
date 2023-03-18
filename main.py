@@ -8,6 +8,7 @@ import czolgGracza
 
 realScreen = pygame.display.set_mode((1366, 768))
 screen = pygame.Surface((1920, 1080))
+pygame.key.set_repeat(1)
 
 running = True
 wszystko = pygame.sprite.Group()
