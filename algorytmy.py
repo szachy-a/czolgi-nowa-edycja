@@ -15,8 +15,21 @@ def utworzGraf(maskaPoziomu: pygame.mask.Mask):
             bit = maskaPoziomu.get_at((j,i))
             if bit == 1:
                 cellMatrix[i//cellHei][j//cellWid] = 1
-    
-
+    graph = {}
+    for y, row in enumerate(cellMatrix):
+        for x, cell in enumerate(row):
+            graph[(x,y)] = {}
+            graph[(x,y)]["connections"] = []
+            if cell == 0:
+                if x > 0 and row[x-1] == 0:
+                    graph[(x,y)]["connections"].append((x - 1, y))
+                if y > 0 and cellMatrix[y-1][x] == 0:
+                    graph[(x,y)]["connections"].append((x, y - 1))
+                if x <= len(row) - 1 and row[x+1] == 0:
+                    graph[(x,y)]["connections"].append((x + 1, y))
+                if y <= len(cellMatrix) and cellMatrix[y+1][x] == 0:
+                    graph[(x,y)]["connections"].append((x, y + 1))
+    return graph
 
 def znajdzSciezke(x1, y1, x2, y2, poziom):
     inf = float("inf")
