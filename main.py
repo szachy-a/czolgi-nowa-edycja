@@ -5,6 +5,7 @@ from pygame.locals import (
 pygame.init()
 
 import czolgGracza
+import solider
 
 screen = pygame.display.set_mode((1366, 768))
 czas = pygame.time.Clock()
@@ -13,7 +14,9 @@ pygame.key.set_repeat(1)
 running = True
 wszystko = pygame.sprite.Group()
 g = czolgGracza.CzolgGracza(100, 100)
+s = solider.Solider(500, 500)
 wszystko.add(g)
+wszystko.add(s)
 while running:
     for event in pygame.event.get():
         if event.type == QUIT:
