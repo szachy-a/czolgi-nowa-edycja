@@ -19,7 +19,7 @@ while running:
         if event.type == QUIT:
             running = False
     screen.fill((255, 255, 255))
-    g.ruch()
+    wszystko.update(wszystko)
     for duszek in wszystko:
         screen.blit(duszek.surf, duszek.rect)
     pygame.display.flip()

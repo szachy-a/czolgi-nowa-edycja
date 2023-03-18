@@ -3,6 +3,7 @@ import pygame
 import abc
 import czolg
 import math
+import pocisk
 
 CZOLG_W_LEWO, CZOLG_W_PRAWO, CZOLG_W_PRZOD, CZOLG_W_TYL, STRZAL, BRAK_AKCJI, *_ = range(100)
 
@@ -21,7 +22,9 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
         super().__init__()
         self.kat = 0
         self.wektor = pygame.math.Vector2((1, 0))
-    def ruch(self):
+    def update(self, wszystko):
+        self.ruch()
+    def ruch(self, wszystko):
         match self.podejmijDecyzje():
             case czolg.CZOLG_W_LEWO:
                 self.kat += 3
@@ -39,6 +42,8 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
             case czolg.CZOLG_W_TYL:
                 self.rect.x -= self.wektor.x * 3
                 self.rect.y -= self.wektor.y * 3
+            case czolg.STRZAL:
+                wszystko.add(pocisk.Pocisk(*self.rect.center, None))
     @abc.abstractmethod
     def podejmijDecyzje(self):
         pass
