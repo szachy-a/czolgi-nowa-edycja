@@ -31,8 +31,15 @@ def utworzGraf(maska: pygame.mask.Mask):
                     graph[(x,y)]["connections"].append((x, y + 1))
     return graph
 
-def znajdzSciezke(x1, y1, x2, y2, graf, szerokoscEkranu, wysokoscEkranu):
-    x1 = x1//(szerokoscEkranu//30)
+def astar(x1, y1, x2, y2, graf, szerokoscEkranu, wysokoscEkranu):
+    x1 = x1//(szerokoscEkranu//40)
+    x2 = x2//(szerokoscEkranu//40)
+    y1 = y1//(wysokoscEkranu//40)
+    y2 = y2//(wysokoscEkranu//40)
+    if (x1,y1) not in graf.keys:
+        return "sciana"
+    if (x2, y2) not in graf.keys():
+        return "graczNiedostepny"
     inf = float("inf")
     for x in graf.keys():
         graf[x]["g"] = inf
@@ -57,3 +64,22 @@ def znajdzSciezke(x1, y1, x2, y2, graf, szerokoscEkranu, wysokoscEkranu):
                     prq.add(x)
     #raise RuntimeError("A* algorithm failed")
     return {}, (x1,y1)
+
+def znajdzSciezke(x1, y1, x2, y2, graf, szerokoscEkranu, wysokoscEkranu):
+    pnd, koniec = astar(x1, y1, x2, y2, graf, szerokoscEkranu, wysokoscEkranu)
+    path = [koniec]
+    while koniec in pnd.keys():
+        koniec = pnd[koniec]
+        path.insert(0, (koniec[0] * 20, koniec[1] * 20))
+    return path
+
+def obliczKat(x1, y1, x2, y2, kat):
+    baseAngle = math.degrees(math.atan(abs(x1-x2)/abs(y1-y2)))
+    if y2 <= y1 and x2 >= x1:
+        return baseAngle
+    elif y2 <= y1 and x2 <= x1:
+        return 180 - baseAngle
+    elif y2 >= y1 and x2 >= x1:
+        return 180 + baseAngle
+    else:
+        return 360 - baseAngle
