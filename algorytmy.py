@@ -15,6 +15,7 @@ def utworzGraf(maskaPoziomu: pygame.mask.Mask):
             bit = maskaPoziomu.get_at((j,i))
             if bit == 1:
                 cellMatrix[i//cellHei][j//cellWid] = 1
+    
 
 
 def znajdzSciezke(x1, y1, x2, y2, poziom):
