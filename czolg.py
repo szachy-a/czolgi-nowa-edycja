@@ -45,7 +45,7 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
                 self.rect.x -= self.wektor.x * 3
                 self.rect.y -= self.wektor.y * 3
             case czolg.STRZAL:
-                wszystko.add(pocisk.Pocisk(*self.rect.center, self.wektor))
+                wszystko.add(pocisk.Pocisk(*self.rect.center, self.wektor, self.odlegloscStrzalu, self.zadajeObrazen))
     @abc.abstractmethod
     def podejmijDecyzje(self):
         pass
