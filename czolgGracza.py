@@ -19,6 +19,10 @@ class CzolgGracza(czolg.Czolg):
         self.surf = self.orgSurf.copy()
         self.rect = self.surf.get_rect(topleft=(x, y))
         self.mask = pygame.mask.from_surface(self.surf)
+        self.maxWytrzymalosc = 3
+        self.odlegloscStrzalu = 1
+        self.zadajeObrazen = 1
+        self.hp = self.maxWytrzymalosc
     def podejmijDecyzje(self):
         klawisze = pygame.key.get_pressed()
         if klawisze[K_a]:
