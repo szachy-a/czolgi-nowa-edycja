@@ -23,7 +23,7 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
         self.kat = 0
         self.wektor = pygame.math.Vector2((1, 0))
     def update(self, wszystko):
-        self.ruch()
+        self.ruch(wszystko)
     def ruch(self, wszystko):
         match self.podejmijDecyzje():
             case czolg.CZOLG_W_LEWO:
