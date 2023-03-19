@@ -33,6 +33,7 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
         self.hp = None
         self.maxCooldown = None
         self.cooldown = None
+        self.predkosc = None
         self.ostatnieOdtworzenie = time.time()
     def update(self, wszystko):
         self.ruch(wszystko)
@@ -67,11 +68,11 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
                 self.wektor = WEKTORY[self.kat]
                 self.mask = pygame.mask.from_surface(self.surf)
             case czolg.CZOLG_W_PRZOD:
-                self.rect.x += self.wektor.x * 3
-                self.rect.y += self.wektor.y * 3
+                self.rect.x += self.wektor.x * self.predkosc
+                self.rect.y += self.wektor.y * self.predkosc
             case czolg.CZOLG_W_TYL:
-                self.rect.x -= self.wektor.x * 3
-                self.rect.y -= self.wektor.y * 3
+                self.rect.x -= self.wektor.x * self.predkosc
+                self.rect.y -= self.wektor.y * self.predkosc
             case czolg.STRZAL:
                 if self.cooldown == 0:
                     wszystko.add(pocisk.Pocisk(*self.rect.center, self.wektor, self.odlegloscStrzalu, self.zadajeObrazen, self))

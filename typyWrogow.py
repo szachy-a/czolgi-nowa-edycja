@@ -5,7 +5,7 @@ import czolgWroga
 class Solider(czolgWroga.CzolgWroga):
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.orgSurf = pygame.image.load('solider.png').convert()
+        self.orgSurf = pygame.image.load('solider.png').convert_alpha()
         self.surf = self.orgSurf.copy()
         self.rect = self.surf.get_rect(topleft=(x, y))
         self.mask = pygame.mask.from_surface(self.surf)
@@ -15,11 +15,12 @@ class Solider(czolgWroga.CzolgWroga):
         self.hp = self.maxWytrzymalosc
         self.maxCooldown = 8 * 30
         self.cooldown = 0
+        self.predkosc = 3
 
 class Scout(czolgWroga.CzolgWroga):
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.orgSurf = pygame.image.load('scout.png').convert_alpha()
+        self.orgSurf = pygame.image.load('scout.png').convert()
         self.orgSurf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         self.surf = self.orgSurf.copy()
         self.rect = self.surf.get_rect(topleft=(x, y))
@@ -30,6 +31,7 @@ class Scout(czolgWroga.CzolgWroga):
         self.hp = self.maxWytrzymalosc
         self.maxCooldown = 6 * 30
         self.cooldown = 0
+        self.predkosc = 2
 
 class Juggernaut(czolgWroga.CzolgWroga):
     def __init__(self, x, y):
@@ -45,3 +47,4 @@ class Juggernaut(czolgWroga.CzolgWroga):
         self.hp = self.maxWytrzymalosc
         self.maxCooldown = 10 * 30
         self.cooldown = 0
+        self.predkosc = 5

@@ -7,32 +7,26 @@ pygame.init()
 import czolgGracza
 import czolgWroga
 import typyWrogow
+import powerups
 
 screen = pygame.display.set_mode((1280, 720))
 czas = pygame.time.Clock()
 pygame.key.set_repeat(1)
 
 def nowyLevel():
+    powerups.askAndAdd(g)
     global level
     g.hp = g.maxWytrzymalosc
     g.cooldown = 0
     level += 1
     x = 10
-    for i in range(level):
-        s = typyWrogow.Scout(x, 0)
-        wszystko.add(s)
-        elementyGry.add(s)
-        x += s.rect.width // 2 + 10
-    for i in range(level // 5):
-        s = typyWrogow.Solider(x, 0)
-        wszystko.add(s)
-        elementyGry.add(s)
-        x += s.rect.width // 2 + 10
-    for i in range(level // 20):
-        b = typyWrogow.Boss(x, 0)
-        wszystko.add(b)
-        elementyGry.add(b)
-        x += b.rect.width // 2 + 10
+    c = [typyWrogow.Scout, typyWrogow.Solider, typyWrogow.Juggernaut][level // 3]
+    for i in range(level % 3):
+        czolg = c(x, 0)
+        wszystko.add(czolg)
+        elementyGry.add(czolg)
+        x += czolg.rect.width + 10
+
 
 running = True
 wszystko = pygame.sprite.Group()
@@ -53,6 +47,11 @@ while running:
             break
     else:
         nowyLevel()
+    for duszek in elementyGry:
+        if isinstance(duszek, czolgGracza.CzolgGracza):
+            break
+    else:
+        running = False
     for duszek in wszystko:
         screen.blit(duszek.surf, duszek.rect)
     pygame.display.flip()
