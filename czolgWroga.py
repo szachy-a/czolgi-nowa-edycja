@@ -4,7 +4,8 @@ import abc
 import algorytmy
 import math
 import czolgGracza as cg
-import pocisk
+
+import __main__
 
 class CzolgWroga(czolg.Czolg):
     def __init__(self, x, y):
@@ -13,8 +14,11 @@ class CzolgWroga(czolg.Czolg):
         self.odlegloscStrzalu = 1
         self.zadajeObrazen = 1
         self.hp = self.maxWytrzymalosc
-    def podejmijDecyzje(self, wszystko: pygame.sprite.Group, szerokoscEkranu, wysokoscEkranu, graf):
-        for x in wszystko.sprites():
+    def podejmijDecyzje(self, wszystko: pygame.sprite.Group):
+        graf = __main__.graf
+        szerokoscEkranu = __main__.screen.get_width()
+        wysokoscEkranu = __main__.screen.get_height()
+        for x in wszystko:
             if type(x) == cg.CzolgGracza:
                 czolgGracza = x
                 break
@@ -46,33 +50,3 @@ class CzolgWroga(czolg.Czolg):
                 return czolg.CZOLG_W_PRAWO
             else:
                 return czolg.STRZAL
-    def update(self, wszystko, szerokoscEkranu, wysokoscEkranu, graf):
-        self.ruch(wszystko, szerokoscEkranu, wysokoscEkranu, graf)
-    def ruch(self, wszystko, szerokoscEkranu, wysokoscEkranu, graf):
-        match self.podejmijDecyzje(wszystko, szerokoscEkranu, wysokoscEkranu, graf):
-            case czolg.CZOLG_W_LEWO:
-                self.kat += 3
-                if self.kat >= 360:
-                    self.kat -= 360
-                self.surf = pygame.transform.rotate(self.orgSurf, self.kat)
-                self.rect = self.surf.get_rect(center=self.rect.center)
-                self.wektor = czolg.WEKTORY[self.kat]
-                self.mask = pygame.mask.from_surface(self.surf)
-            case czolg.CZOLG_W_PRAWO:
-                self.kat -= 3
-                if self.kat <= -360:
-                    self.kat += 360
-                self.surf = pygame.transform.rotate(self.orgSurf, self.kat)
-                self.rect = self.surf.get_rect(center=self.rect.center)
-                self.wektor = czolg.WEKTORY[self.kat]
-                self.mask = pygame.mask.from_surface(self.surf)
-            case czolg.CZOLG_W_PRZOD:
-                self.rect.x += self.wektor.x * 3
-                self.rect.y += self.wektor.y * 3
-            case czolg.CZOLG_W_TYL:
-                self.rect.x -= self.wektor.x * 3
-                self.rect.y -= self.wektor.y * 3
-            case czolg.STRZAL:
-                wszystko.add(pocisk.Pocisk(*self.rect.center, self.wektor, self.odlegloscStrzalu, self.zadajeObrazen))
-
-

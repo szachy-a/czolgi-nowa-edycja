@@ -22,6 +22,8 @@ class CzolgGracza(czolg.Czolg):
         self.odlegloscStrzalu = 1
         self.zadajeObrazen = 1
         self.hp = self.maxWytrzymalosc
+        self.maxCooldown = 5 * 30
+        self.cooldown  = 0
     def podejmijDecyzje(self):
         klawisze = pygame.key.get_pressed()
         if klawisze[K_a]:
