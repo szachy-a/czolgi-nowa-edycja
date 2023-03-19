@@ -8,7 +8,7 @@ import pocisk
 
 class CzolgWroga(czolg.Czolg):
     def __init__(self, x, y):
-        super.__init__(x,y)
+        super().__init__(x,y)
         self.maxWytrzymalosc = 3
         self.odlegloscStrzalu = 1
         self.zadajeObrazen = 1

@@ -18,7 +18,7 @@ gracze = pygame.sprite.Group()
 wrogowie = pygame.sprite.Group()
 g = czolgGracza.CzolgGracza(100, 100)
 s = typyWrogow.Solider(500, 500)
-maska = pygame.image.load("testowaMaska.png").convert_alpha()
+maska = pygame.mask.from_surface(pygame.image.load("testowaMaska.png").convert_alpha())
 graf = algorytmy.utworzGraf(maska)
 
 gracze.add(g)

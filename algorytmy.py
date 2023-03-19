@@ -15,6 +15,7 @@ def utworzGraf(maska: pygame.mask.Mask):
             bit = maska.get_at((j,i))
             if bit == 1:
                 cellMatrix[i//cellHei][j//cellWid] = 1
+    print(cellMatrix)
     graph = {}
     for y, row in enumerate(cellMatrix):
         for x, cell in enumerate(row):
@@ -29,6 +30,7 @@ def utworzGraf(maska: pygame.mask.Mask):
                     graph[(x,y)]["connections"].append((x + 1, y))
                 if y <= len(cellMatrix) and cellMatrix[y+1][x] == 0:
                     graph[(x,y)]["connections"].append((x, y + 1))
+    print(graph)
     return graph
 
 def astar(x1, y1, x2, y2, graf, szerokoscEkranu, wysokoscEkranu):
