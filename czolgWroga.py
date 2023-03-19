@@ -4,7 +4,8 @@ import abc
 import algorytmy
 import math
 import czolgGracza as cg
-import pocisk
+
+import __main__
 
 class CzolgWroga(czolg.Czolg):
     def __init__(self, x, y):
@@ -13,8 +14,11 @@ class CzolgWroga(czolg.Czolg):
         self.odlegloscStrzalu = 1
         self.zadajeObrazen = 1
         self.hp = self.maxWytrzymalosc
-    def podejmijDecyzje(self, wszystko: pygame.sprite.Group, szerokoscEkranu, wysokoscEkranu, graf):
-        for x in wszystko.sprites():
+    def podejmijDecyzje(self, wszystko: pygame.sprite.Group):
+        graf = __main__.graf
+        szerokoscEkranu = __main__.screen.get_width()
+        wysokoscEkranu = __main__.screen.get_height()
+        for x in wszystko:
             if type(x) == cg.CzolgGracza:
                 czolgGracza = x
                 break
@@ -46,3 +50,5 @@ class CzolgWroga(czolg.Czolg):
                 return czolg.CZOLG_W_PRAWO
             else:
                 return czolg.STRZAL
+    def podejmijDecyzje(self):
+        return czolg.BRAK_AKCJI
