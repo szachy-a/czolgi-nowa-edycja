@@ -2,9 +2,9 @@ import pygame
 
 import abc
 import czolg
-import math
 import pocisk
 import time
+import __main__
 
 CZOLG_W_LEWO, CZOLG_W_PRAWO, CZOLG_W_PRZOD, CZOLG_W_TYL, STRZAL, BRAK_AKCJI, *_ = range(100)
 
@@ -36,6 +36,14 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
         self.ostatnieOdtworzenie = time.time()
     def update(self, wszystko):
         self.ruch(wszystko)
+        if self.rect.centerx < 0:
+            self.rect.centerx = 0
+        elif self.rect.centerx > __main__.screen.get_width():
+            self.rect.centerx = __main__.screen.get_width()
+        if self.rect.centery < 0:
+            self.rect.centery = 0
+        elif self.rect.centery > __main__.screen.get_height():
+            self.rect.centery = __main__.screen.get_height()
         self.cooldown -= 1
         if self.cooldown < 0:
             self.cooldown = 0
