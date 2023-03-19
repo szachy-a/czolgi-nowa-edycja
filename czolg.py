@@ -78,5 +78,4 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
         surf.fill((255, 0, 0))
         pygame.draw.rect(surf, (0, 255, 0), ((0, 0), (int(self.maxWytrzymalosc / self.hp * self.orgSurf.get_width()), 10)))
         srodek = self.orgSurf.get_height() // 2
-
         self.surf.blit(surf, surf.get_rect(centerx=self.surf.get_width() // 2, top=self.surf.get_height() // 2 - srodek))
