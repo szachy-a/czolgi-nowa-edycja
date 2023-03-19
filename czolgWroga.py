@@ -43,4 +43,10 @@ class CzolgWroga(czolg.Czolg):
                 return czolg.CZOLG_W_PRAWO
             else:
                 return czolg.CZOLG_W_LEWO
+        p = pocisk.Pocisk(*self.rect.center, self.wektor, self.odlegloscStrzalu, 0, self)
+        g = pygame.sprite.Group(p)
+        for i in range(90):
+            p.update(pygame.sprite.Group(__main__.g))
+            if p in g:
+                return czolg.CZOLG_W_PRZOD
         return czolg.STRZAL
