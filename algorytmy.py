@@ -22,14 +22,18 @@ def utworzGraf(maska: pygame.mask.Mask):
             graph[(x,y)] = {}
             graph[(x,y)]["connections"] = []
             if cell == 0:
-                if x > 0 and row[x-1] == 0:
-                    graph[(x,y)]["connections"].append((x - 1, y))
-                if y > 0 and cellMatrix[y-1][x] == 0:
-                    graph[(x,y)]["connections"].append((x, y - 1))
-                if x <= len(row) - 1 and row[x+1] == 0:
-                    graph[(x,y)]["connections"].append((x + 1, y))
-                if y <= len(cellMatrix) and cellMatrix[y+1][x] == 0:
-                    graph[(x,y)]["connections"].append((x, y + 1))
+                if x > 0:
+                    if row[x-1] == 0:
+                        graph[(x,y)]["connections"].append((x - 1, y))
+                if y > 0:
+                    if cellMatrix[y-1][x] == 0:
+                        graph[(x,y)]["connections"].append((x, y - 1))
+                if x <= len(row) - 2:
+                    if row[x+1] == 0:
+                        graph[(x,y)]["connections"].append((x + 1, y))
+                if y <= len(cellMatrix) - 2:
+                    if cellMatrix[y+1][x] == 0:
+                        graph[(x,y)]["connections"].append((x, y + 1))
     print(graph)
     return graph
 
@@ -38,7 +42,7 @@ def astar(x1, y1, x2, y2, graf, szerokoscEkranu, wysokoscEkranu):
     x2 = x2//(szerokoscEkranu//40)
     y1 = y1//(wysokoscEkranu//40)
     y2 = y2//(wysokoscEkranu//40)
-    if (x1,y1) not in graf.keys:
+    if (x1,y1) not in graf.keys():
         return "sciana"
     if (x2, y2) not in graf.keys():
         return "graczNiedostepny"
@@ -51,7 +55,7 @@ def astar(x1, y1, x2, y2, graf, szerokoscEkranu, wysokoscEkranu):
     current = None
     prq = {(x1,y1)}
     pnd = {}
-    while prq != {}:
+    while prq != set():
         current = min(prq, key=lambda x:graf[x]["f"])
         if current == (x2,y2):
             return pnd, current
@@ -75,7 +79,7 @@ def znajdzSciezke(x1, y1, x2, y2, graf, szerokoscEkranu, wysokoscEkranu):
         path.insert(0, (koniec[0] * 20, koniec[1] * 20))
     return path
 
-def obliczKat(x1, y1, x2, y2, kat):
+def obliczKat(x1, y1, x2, y2):
     baseAngle = math.degrees(math.atan(abs(x1-x2)/abs(y1-y2)))
     if y2 <= y1 and x2 >= x1:
         return baseAngle
