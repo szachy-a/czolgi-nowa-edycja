@@ -1,5 +1,7 @@
 import pygame
 
+import czolg
+
 class Pocisk(pygame.sprite.Sprite):
     def __init__(self, x, y, wektor, odlegloscStrzalu, zadajeObrazen):
         super().__init__()
@@ -12,5 +14,16 @@ class Pocisk(pygame.sprite.Sprite):
         if self.odlegloscStrzalu:
             self.rect.move_ip(*self.wektor * 10)
             self.odlegloscStrzalu -= 1
+            for duszek in list(elementyGry):
+                if duszek is self:
+                    continue
+                if pygame.sprite.collide_mask(self, duszek):
+                    self.kill()
+                    if isinstance(duszek, czolg.Czolg):
+                        duszek.hp -= self.zadajeObrazen
+                        if duszek.hp <= 0:
+                            duszek.kill()
+                    else:
+                        duszek.kill()
         else:
             self.kill()
