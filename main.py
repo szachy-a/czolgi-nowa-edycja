@@ -7,20 +7,25 @@ pygame.init()
 import czolgGracza
 import czolgWroga
 import typyWrogow
-import powerups
+import usingTkinter
 
 screen = pygame.display.set_mode((1280, 720))
 czas = pygame.time.Clock()
 pygame.key.set_repeat(1)
 
 def nowyLevel():
-    powerups.askAndAdd(g)
     global level
+    global running
+    usingTkinter.askAndAdd(g)
     g.hp = g.maxWytrzymalosc
     g.cooldown = 0
     level += 1
     x = 10
-    c = [typyWrogow.Scout, typyWrogow.Solider, typyWrogow.Juggernaut][level // 3]
+    try:
+        c = [typyWrogow.Scout, typyWrogow.Solider, typyWrogow.Juggernaut][level // 3]
+    except IndexError:
+        usingTkinter.wygrana()
+        running = False
     for i in range(level % 3):
         czolg = c(x, 0)
         wszystko.add(czolg)
@@ -51,6 +56,7 @@ while running:
         if isinstance(duszek, czolgGracza.CzolgGracza):
             break
     else:
+        usingTkinter.przegrana()
         running = False
     for duszek in wszystko:
         screen.blit(duszek.surf, duszek.rect)
