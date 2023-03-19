@@ -19,7 +19,6 @@ class Pocisk(pygame.sprite.Sprite):
             self.rect.move_ip(*self.wektor * 10)
             self.odlegloscStrzalu -= 1
             for duszek in list(__main__.elementyGry):
-                print(duszek)
                 if duszek is self:
                     continue
                 if pygame.sprite.collide_mask(self, duszek):
@@ -32,7 +31,5 @@ class Pocisk(pygame.sprite.Sprite):
                     else:
                         duszek.kill()
                         break
-            print('Przetworzono wszystkie duszki')
         else:
             self.kill()
-        print('Klatka')
