@@ -74,9 +74,9 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
     def __repr__(self):
         return '<' + self.__class__.__name__ + repr(self.__dict__) + '>'
     def updateHealthBar(self):
-        print('Aktualizacja')
         surf = pygame.Surface((100, 10))
         surf.fill((255, 0, 0))
-        pygame.draw.rect(surf, (0, 255, 0), ((0, 0), (int(self.maxWytrzymalosc / self.hp * 100), 10)))
+        pygame.draw.rect(surf, (0, 255, 0), ((0, 0), (int(self.hp / self.maxWytrzymalosc * 100), 10)))
         srodek = self.orgSurf.get_height() // 2
         self.surf.blit(surf, surf.get_rect(centerx=self.surf.get_width() // 2, top=self.surf.get_height() // 2 - srodek))
+        pygame.image.save(surf, 'test2.png')
