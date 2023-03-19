@@ -50,5 +50,3 @@ class CzolgWroga(czolg.Czolg):
                 return czolg.CZOLG_W_PRAWO
             else:
                 return czolg.STRZAL
-    def podejmijDecyzje(self):
-        return czolg.BRAK_AKCJI
