@@ -26,7 +26,7 @@ class CzolgWroga(czolg.Czolg):
             obrot = 0
             pd = self.podejmijDecyzje
             self.podejmijDecyzje = lambda: czolg.CZOLG_W_LEWO
-            while True:
+            while obrot < 360:
                 obrot += 3
                 self.ruch(None)
                 p = pocisk.Pocisk(*self.rect.center, self.wektor, 100, 0, self)
