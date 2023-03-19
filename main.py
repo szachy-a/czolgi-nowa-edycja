@@ -16,14 +16,11 @@ running = True
 wszystko = pygame.sprite.Group()
 elementyGry = pygame.sprite.Group()
 g = czolgGracza.CzolgGracza(100, 100)
-s = typyWrogow.Solider(500, 500)
 maska = pygame.mask.from_surface(pygame.image.load("testowaMaska.png").convert_alpha())
 graf = algorytmy.utworzGraf(maska)
 
 elementyGry.add(g)
-elementyGry.add(s)
 wszystko.add(g)
-wszystko.add(s)
 while running:
     for event in pygame.event.get():
         if event.type == QUIT:

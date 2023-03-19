@@ -23,11 +23,24 @@ class CzolgWroga(czolg.Czolg):
             if p not in g:
                 break
         else:
-            return czolg.CZOLG_W_LEWO
-        p = pocisk.Pocisk(*self.rect.center, self.wektor, self.odlegloscStrzalu, 0, self)
-        g = pygame.sprite.Group(p)
-        for i in range(self.odlegloscStrzalu):
-            p.update(pygame.sprite.Group(__main__.g))
-            if p not in g:
-                return czolg.STRZAL
-        return czolg.CZOLG_W_PRZOD
+            obrot = 0
+            pd = self.podejmijDecyzje
+            self.podejmijDecyzje = lambda: czolg.CZOLG_W_LEWO
+            while True:
+                obrot += 3
+                self.ruch(None)
+                p = pocisk.Pocisk(*self.rect.center, self.wektor, 100, 0, self)
+                g = pygame.sprite.Group(p)
+                for i in range(90):
+                    p.update(pygame.sprite.Group(__main__.g))
+                    if p not in g:
+                        break
+                else:
+                    continue
+                break
+            self.podejmijDecyzje = pd
+            if obrot > 180:
+                return czolg.CZOLG_W_PRAWO
+            else:
+                return czolg.CZOLG_W_LEWO
+        return czolg.STRZAL
