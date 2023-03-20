@@ -8,6 +8,7 @@ import czolgGracza
 import czolgWroga
 import typyWrogow
 import usingTkinter
+import json
 
 screen = pygame.display.set_mode((1280, 720))
 czas = pygame.time.Clock()
@@ -22,17 +23,18 @@ def nowyLevel():
     level += 1
     x = 10
     try:
-        c = [typyWrogow.Scout, typyWrogow.Solider, typyWrogow.Juggernaut][level // 3]
+        l = levels[level - 1]
     except IndexError:
         usingTkinter.wygrana()
         running = False
-    for i in range(level % 3):
-        czolg = c(x, 0)
-        wszystko.add(czolg)
+        return
+    for cls, pos in l:
+        czolg = getattr(typyWrogow, cls)(*pos)
         elementyGry.add(czolg)
-        x += czolg.rect.width + 10
+        wszystko.add(czolg)
 
-
+with open('wszystkiePlansze.json') as f:
+    levels = json.load(f)
 running = True
 tlo = pygame.image.load('tlo.png').convert()
 wszystko = pygame.sprite.Group()
