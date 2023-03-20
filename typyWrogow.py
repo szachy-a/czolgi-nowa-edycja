@@ -20,8 +20,7 @@ class Solider(czolgWroga.CzolgWroga):
 class Scout(czolgWroga.CzolgWroga):
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.orgSurf = pygame.image.load('scout.png').convert()
-        self.orgSurf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
+        self.orgSurf = pygame.image.load('scout.png').convert_alpha()
         self.surf = self.orgSurf.copy()
         self.rect = self.surf.get_rect(topleft=(x, y))
         self.mask = pygame.mask.from_surface(self.surf)
@@ -36,8 +35,7 @@ class Scout(czolgWroga.CzolgWroga):
 class Juggernaut(czolgWroga.CzolgWroga):
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.orgSurf = pygame.image.load('juggernaut.png').convert()
-        self.orgSurf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
+        self.orgSurf = pygame.image.load('juggernaut.png').convert_alpha()
         self.surf = self.orgSurf.copy()
         self.rect = self.surf.get_rect(topleft=(x, y))
         self.mask = pygame.mask.from_surface(self.surf)
