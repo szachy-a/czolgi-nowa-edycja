@@ -34,6 +34,7 @@ def nowyLevel():
 
 
 running = True
+tlo = pygame.image.load('tlo.png').convert()
 wszystko = pygame.sprite.Group()
 elementyGry = pygame.sprite.Group()
 g = czolgGracza.CzolgGracza(640, 700)
@@ -58,6 +59,7 @@ while running:
     else:
         usingTkinter.przegrana()
         running = False
+    screen.blit(tlo, (0, 0))
     for duszek in wszystko:
         screen.blit(duszek.surf, duszek.rect)
     pygame.display.flip()

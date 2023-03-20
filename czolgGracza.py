@@ -4,9 +4,7 @@ from pygame.locals import (
     K_d,
     K_w,
     K_s,
-    K_SPACE,
-    K_LEFT,
-    K_RIGHT
+    K_SPACE
 )
 
 import czolg
