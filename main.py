@@ -11,6 +11,7 @@ import usingTkinter
 import json
 
 screen = pygame.display.set_mode((1280, 720))
+pygame.display.set_caption('Czołgi Nowa Edycja')
 czas = pygame.time.Clock()
 pygame.key.set_repeat(1)
 
@@ -50,6 +51,10 @@ while running:
             running = False
     screen.fill((255, 255, 255))
     wszystko.update(wszystko)
+    screen.blit(tlo, (0, 0))
+    for duszek in wszystko:
+        screen.blit(duszek.surf, duszek.rect)
+    pygame.display.flip()
     for duszek in elementyGry:
         if isinstance(duszek, czolgWroga.CzolgWroga):
             break
@@ -61,9 +66,5 @@ while running:
     else:
         usingTkinter.przegrana()
         running = False
-    screen.blit(tlo, (0, 0))
-    for duszek in wszystko:
-        screen.blit(duszek.surf, duszek.rect)
-    pygame.display.flip()
     czas.tick(30)
 pygame.quit()
