@@ -35,6 +35,7 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
         self.cooldown = None
         self.predkosc = None
         self.ostatnieOdtworzenie = time.time()
+        pygame.mixer.music.load("odglosStrzalu.wav")
     def update(self, wszystko):
         self.ruch(wszystko)
         if self.rect.centerx < 0:
@@ -76,6 +77,7 @@ class Czolg(abc.ABC, pygame.sprite.Sprite):
             case czolg.STRZAL:
                 if self.cooldown == 0:
                     wszystko.add(pocisk.Pocisk(*self.rect.center, self.wektor, self.odlegloscStrzalu, self.zadajeObrazen, self))
+                    pygame.mixer.music.play()
                     self.cooldown = self.maxCooldown
     @abc.abstractmethod
     def podejmijDecyzje(self):
