@@ -10,7 +10,8 @@ import typyWrogow
 import usingTkinter
 import json
 
-screen = pygame.display.set_mode((1280, 720))
+realScreen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+screen = pygame.Surface((1280, 720))
 pygame.display.set_caption('Czołgi Nowa Edycja')
 czas = pygame.time.Clock()
 pygame.key.set_repeat(1)
@@ -54,6 +55,7 @@ while running:
     screen.blit(tlo, (0, 0))
     for duszek in wszystko:
         screen.blit(duszek.surf, duszek.rect)
+    realScreen.blit(pygame.transform.scale(screen, realScreen.get_size()), (0, 0))
     pygame.display.flip()
     for duszek in elementyGry:
         if isinstance(duszek, czolgWroga.CzolgWroga):
